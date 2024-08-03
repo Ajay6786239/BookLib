@@ -21,6 +21,12 @@
       "dest": "myapp/wsgi.py"
     }
   ],
+  {
+  "scripts": {
+    "build": "your-framework build --output public"
+  }
+},
+
   "env": {
     "DATABASE_URL": "mysql://root:14082004@localhost/BookLib",
     "SECRET_KEY": "django-insecure-^f4gc5(c*a21rjo9^&czv_p3-3*oi2iiyukqbom9fy0_h+h_7@)",
