@@ -1,22 +1,21 @@
+# views.py
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .models import Book
-from django.urls import reverse
-from django.http import JsonResponse
 
 def index(request):
     if request.method == 'POST':
         title = request.POST.get('title')
         author = request.POST.get('author')
-        des = request.POST.get('des')
-        if title and author and des:
-            book = Book.objects.create(title=title, author=author, des=des)
+        description = request.POST.get('description')  # Renamed from 'des' to 'description'
+        if title and author and description:
+            book = Book.objects.create(title=title, author=author, description=description)
             return JsonResponse({
                 'success': True,
                 'id': book.id,
                 'title': book.title,
                 'author': book.author,
-                'des': book.des
+                'description': book.description  # Updated to match the field name
             })
         return JsonResponse({'success': False})
 
@@ -25,8 +24,10 @@ def index(request):
 
 def delete_book(request, book_id):
     if request.method == 'DELETE':
-        book = Book.objects.get(id=book_id)
-        book.delete()
-        return JsonResponse({'success': True})
-    return JsonResponse({'success': False})
-
+        try:
+            book = Book.objects.get(id=book_id)
+            book.delete()
+            return JsonResponse({'success': True})
+        except Book.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Book not found'})
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})
