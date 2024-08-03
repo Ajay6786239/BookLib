@@ -9,6 +9,9 @@
       }
     }
   ],
+  {
+  "cleanUrls": true
+},
   "routes": [
     {
       "src": "/",
