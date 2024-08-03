@@ -1,24 +1,41 @@
-{ 
-  "version": 2, 
-  "builds": [ 
-    { 
-      "src": "your_project_name/wsgi.py", 
-      "use": "@vercel/python", 
-      "config": { "maxLambdaSize": "15mb" } 
-    }, 
-    { 
-      "src": "staticfiles/**/*", 
-      "use": "@vercel/static" 
-    } 
-  ], 
-  "routes": [ 
-    { 
-      "src": "/static/(.*)", 
-      "dest": "/staticfiles/$1" 
-    }, 
-    { 
-      "src": "/(.*)", 
-      "dest": "your_project_name/wsgi.py" 
-    } 
-  ] 
-} 
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "public"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    }
+  ],
+  "env": {
+    "DATABASE_URL": "mysql://root:14082004@localhost/BookLib",
+    "API_KEY": "apiKey"
+  },
+  "functions": {
+    "api/*.js": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  },
+  "framework": "nextjs",
+  "build": {
+    "command": "npm run build",
+    "env": {
+      "NEXT_PUBLIC_API_URL": "apiUrl"
+    }
+  },
+  "public": true
+}
+
