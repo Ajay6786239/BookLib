@@ -2,43 +2,31 @@
   "version": 2,
   "builds": [
     {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "public"
-      }
-    }
-  ],
-  {
-  "cleanUrls": true
-},
-  "routes": [
-    {
-      "src": "/",
-      "dest": "/index.html"
+      "src": "myapp/wsgi.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "15mb" }
     },
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "src": "staticfiles/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "BookLIb/static/BookLib(.*)",
+      "dest": "staticfiles/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "myapp/wsgi.py"
     }
   ],
   "env": {
     "DATABASE_URL": "mysql://root:14082004@localhost/BookLib",
-    "API_KEY": "apiKey"
-  },
-  "functions": {
-    "api/*.js": {
-      "memory": 1024,
-      "maxDuration": 10
-    }
-  },
-  "framework": "nextjs",
-  "build": {
-    
-    "env": {
-      "NEXT_PUBLIC_API_URL": "apiUrl"
-    }
-  },
-  "public": true
+    "SECRET_KEY": "django-insecure-^f4gc5(c*a21rjo9^&czv_p3-3*oi2iiyukqbom9fy0_h+h_7@)",
+    "DEBUG": "False",
+    "ALLOWED_HOSTS": "localhost,127.0.0.1,BookLib.vercel.app"
+  }
 }
+
 
