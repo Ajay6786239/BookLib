@@ -65,6 +65,10 @@ TEMPLATES = [
     },
 ]
 
+import pymysql
+pymysql.install_as_MySQLdb()
+
+
 WSGI_APPLICATION = 'myapp.wsgi.application'
 
 # Database configuration
