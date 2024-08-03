@@ -23,7 +23,7 @@
   ],
   {
   "scripts": {
-    "build": "your-framework build --output public"
+    "build": "[framework build] --output public"
   }
 },
 
