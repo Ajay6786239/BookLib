@@ -31,7 +31,7 @@
   },
   "framework": "nextjs",
   "build": {
-    "command": "npm run build",
+    
     "env": {
       "NEXT_PUBLIC_API_URL": "apiUrl"
     }
