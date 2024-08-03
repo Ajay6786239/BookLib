@@ -1,3 +1,6 @@
+const apiKey = process.env.API_KEY || 'your-api-key';
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'your-api-url';
+
 document.addEventListener('DOMContentLoaded', function() {
     var plus = document.getElementById("plus");
     var pop = document.querySelector(".pop");
